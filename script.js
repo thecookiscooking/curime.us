@@ -23,19 +23,19 @@
 // Define video sources and their variations
 const videos = [
     {
-        src: 'https://player.vimeo.com/video/1066647564?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647564?h=abc123def&background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p&app_id=122963&playsinline=1&transparent=0',
         title: 'Rose Video'
     },
     {
-        src: 'https://player.vimeo.com/video/1066647579?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647579?h=abc123def&background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p&app_id=122963&playsinline=1&transparent=0',
         title: 'Maple Video'
     },
     {
-        src: 'https://player.vimeo.com/video/1066647592?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647592?h=abc123def&background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p&app_id=122963&playsinline=1&transparent=0',
         title: 'ElPaso Video'
     },
     {
-        src: 'https://player.vimeo.com/video/1066647608?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647608?h=abc123def&background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p&app_id=122963&playsinline=1&transparent=0',
         title: 'Voltaje Video'
     }
 ];
