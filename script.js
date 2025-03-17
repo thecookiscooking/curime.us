@@ -23,19 +23,19 @@
 // Define video sources and their variations
 const videos = [
     {
-        src: 'https://player.vimeo.com/video/647564?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647564?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
         title: 'Rose Video'
     },
     {
-        src: 'https://player.vimeo.com/video/647579?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647579?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
         title: 'Maple Video'
     },
     {
-        src: 'https://player.vimeo.com/video/647592?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647592?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
         title: 'ElPaso Video'
     },
     {
-        src: 'https://player.vimeo.com/video/647608?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
+        src: 'https://player.vimeo.com/video/1066647608?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&quality=1080p',
         title: 'Voltaje Video'
     }
 ];
