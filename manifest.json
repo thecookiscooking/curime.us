@@ -1,0 +1,16 @@
+{
+    "name": "CB - Creative Technology",
+    "short_name": "CB",
+    "description": "Creative technologist and digital artist exploring the intersection of art and technology.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "icons": [
+        {
+            "src": "/images/C_Logo_128px_white.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ]
+} 

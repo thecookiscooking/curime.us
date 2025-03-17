@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CB - Creative technologist and digital artist exploring the intersection of art and technology.">
+    <meta name="keywords" content="creative technology, digital art, web development, design, interactive art, Curime Batliner">
+    <meta name="author" content="Curime Batliner">
+    
+    <!-- Analytics Integration -->
+    <script defer data-domain="curime.us" src="https://plausible.io/js/script.js"></script>
+    
+    <!-- Progressive Web App Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/png" href="/images/C_Logo_128px_white.png">
+    <link rel="apple-touch-icon" href="/images/C_Logo_128px_white.png">
+    
+    <!-- Performance Optimization: Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+    <link rel="preload" href="/videos/Website_CB_Rose_Video.mp4" as="video" type="video/mp4">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Social Media Integration -->
+    <meta property="og:title" content="Curime Batliner - Creative Technology">
+    <meta property="og:description" content="Creative technologist and digital artist exploring the intersection of art and technology.">
+    <meta property="og:image" content="https://curime.us/images/C_Logo_128px_white.png">
+    <meta property="og:url" content="https://curime.us">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Integration -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@curimebatliner">
+    <meta name="twitter:title" content="Curime Batliner - Creative Technology">
+    <meta name="twitter:description" content="Creative technologist and digital artist exploring the intersection of art and technology.">
+    <meta name="twitter:image" content="https://curime.us/images/C_Logo_128px_white.png">
+    
+    <title>CB - Creative Technology</title>
+    
+    <!-- Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Performance Optimization: DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <style>
+        /**
+         * Global Reset and Box Sizing
+         */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /**
+         * Base Styles
+         */
+        body {
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /**
+         * Header Navigation
+         * - Fixed position with gradient background
+         * - Contains logo and navigation links
+         */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /**
+         * Logo Styling
+         */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            filter: brightness(1.1);
+        }
+
+        /**
+         * Navigation Links
+         */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /**
+         * Video Slideshow Container
+         */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        /**
+         * Individual Video Slides
+         */
+        .video-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2.5s ease-in-out;
+            background: black;
+        }
+
+        .video-slide.active {
+            opacity: 1;
+        }
+
+        .video-slide iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            border: none;
+            pointer-events: none;
+            transform: scale(1.5);
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .video-slide iframe {
+                transform: scale(2);
+            }
+        }
+
+        @keyframes noise {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-1%, -1%); }
+            20% { transform: translate(1%, 1%); }
+            30% { transform: translate(-2%, -2%); }
+            40% { transform: translate(2%, 2%); }
+            50% { transform: translate(-1%, 1%); }
+            60% { transform: translate(1%, -1%); }
+            70% { transform: translate(2%, -2%); }
+            80% { transform: translate(-2%, 2%); }
+            90% { transform: translate(1%, -2%); }
+        }
+
+        /**
+         * Main Content Overlay
+         */
+        .content {
+            position: relative;
+            z-index: 10;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+            margin-top: -10px;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .content p {
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /**
+         * Call-to-Action Button
+         */
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background-color: #1473E6;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #0d66d0;
+        }
+
+        /**
+         * Modal Styles
+         * - Circular design with blur effect
+         * - Contains social links and email
+         */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 50%;
+            z-index: 1000;
+            width: 320px;
+            height: 320px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /**
+         * Modal Content Styling
+         */
+        .modal-content {
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        /**
+         * Modal Links Container
+         */
+        .modal-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        /**
+         * Modal Link Styling
+         * - Semi-transparent until hover
+         * - Smooth transition effects
+         */
+        .modal-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .modal-links a:hover {
+            color: rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /**
+         * Email Container Styling
+         * - Flexible layout for email and copy button
+         */
+        .email-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .email-container:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .email-container .email-link {
+            flex-grow: 1;
+            text-align: center;
+            background: none !important;
+            padding: 0 !important;
+            color: inherit;
+        }
+
+        /**
+         * Copy Button Styling
+         * - Includes hover and active states
+         * - Animation for feedback
+         */
+        .copy-button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 5px;
+            opacity: 0.7;
+            transition: all 0.15s ease;
+            font-size: 16px;
+            position: absolute;
+            right: 10px;
+        }
+
+        .copy-button:hover {
+            opacity: 1;
+        }
+
+        .copy-button:active {
+            transform: scale(0.95);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .copy-button.copied {
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .copy-button i {
+            margin-right: 4px;
+        }
+
+        /**
+         * Copy Feedback Tooltip
+         * - Appears when email is copied
+         */
+        .copy-feedback {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        /**
+         * Social Media Icons
+         * - Fade in on hover
+         */
+        .fa-instagram {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-links a:hover .fa-instagram {
+            opacity: 1;
+        }
+
+        .fa-envelope {
+            margin-left: 8px;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .email-container:hover .fa-envelope {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /**
+         * Modal Close Button
+         */
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 24px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        /**
+         * Modal Overlay
+         * - Darkens and blurs background when modal is open
+         */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="images/C_Logo_128px_white.png" alt="Logo">
+        </a>
+        <nav class="nav-links">
+            <a href="#" onclick="toggleModal(event)">say hello !</a>
+        </nav>
+    </header>
+
+    <!-- Modal Components -->
+    <div class="modal-overlay" onclick="toggleModal(event)"></div>
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-links">
+                <!-- Social Media Links -->
+                <a href="https://instagram.com/curimebatliner" target="_blank">slide <i class="fab fa-instagram"></i></a>
+                <!-- Email Container with Copy Button -->
+                <div class="email-container">
+                    <a href="mailto:batliner@curime.us" class="email-link">send <i class="far fa-envelope"></i></a>
+                    <button class="copy-button" onclick="copyEmail(event)"><i class="far fa-copy"></i></button>
+                    <div class="copy-feedback">Email copied!</div>
+                </div>
+                <a href="https://x.com/curimebatliner" target="_blank">jump  𝕏</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Slideshow Container -->
+    <div class="slideshow">
+        <!-- Video slides are dynamically added by JavaScript -->
+    </div>
+
+    <!-- Main Content Overlay -->
+    <div class="content">
+        <h1>cb</h1>
+        <p>playful with machines</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        /**
+         * Toggles the modal visibility
+         * @param {Event} event - The click event
+         */
+        function toggleModal(event) {
+            event.preventDefault();
+            const modal = document.querySelector('.modal');
+            const overlay = document.querySelector('.modal-overlay');
+            modal.classList.toggle('show');
+            overlay.classList.toggle('show');
+        }
+
+        /**
+         * Handles copying email to clipboard with visual feedback
+         * @param {Event} event - The click event
+         */
+        function copyEmail(event) {
+            event.preventDefault();
+            const email = "batliner@curime.us";
+            const button = event.currentTarget;
+            
+            navigator.clipboard.writeText(email).then(() => {
+                const feedback = button.parentElement.querySelector('.copy-feedback');
+                
+                // Add pulse animation class
+                button.classList.add('copied');
+                
+                // Show feedback
+                feedback.classList.add('show');
+                
+                // Revert back after 2 seconds
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.querySelector('.modal');
+            const overlay = document.querySelector('.modal-overlay');
+            if (event.target === overlay) {
+                modal.classList.remove('show');
+                overlay.classList.remove('show');
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.querySelector('.modal');
+                const overlay = document.querySelector('.modal-overlay');
+                modal.classList.remove('show');
+                overlay.classList.remove('show');
+            }
+        });
+
+        // Prevent keyboard shortcuts for saving content
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent drag and drop of video elements
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html> 
